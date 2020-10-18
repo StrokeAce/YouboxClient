@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>20201017163050.png</file>
+        <file>bitbug_favicon.ico</file>
+    </qresource>
+    <qresource prefix="/123" lang="123"/>
+</RCC>
