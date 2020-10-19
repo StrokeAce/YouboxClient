@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QDesktopWidget>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,7 +32,12 @@ void MainWindow::on_button_Login_clicked()
         QMessageBox::critical(0 ,"提示" , "请填写密码", QMessageBox::Ok,  0 );
         return;
     }
+    
+    int width = QApplication::desktop()->width();
+    int height = QApplication::desktop()->height();
 
-    QString url = "xfreerdp /u:" + userName + " /p:" + pwd + " /d:src /w:1366 /h:768 /v:61.184.241.30:25788 /cert-ignore -sec-nla";
-    system((char*)url.toLatin1().data());
+    char cmd[1024] = {0};
+    sprintf(cmd, "xfreerdp /u:%s /p:%s /d:src /w:%d /h:%d /v:61.184.241.30:25788 /cert-ignore -sec-nla",
+    (char*)userName.toLatin1().data(),(char*)pwd.toLatin1().data(),width,height);
+    system(cmd);
 }
