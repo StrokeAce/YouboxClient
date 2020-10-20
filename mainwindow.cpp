@@ -37,7 +37,7 @@ void MainWindow::on_button_Login_clicked()
     int height = QApplication::desktop()->height();
 
     char cmd[1024] = {0};
-    sprintf(cmd, "xfreerdp /u:%s /p:%s /d:src /w:%d /h:%d /v:61.184.241.30:25788 /cert-ignore -sec-nla",
+    sprintf(cmd, "/home/youboxclient/freerdp /u:%s /p:%s /d:src /w:%d /h:%d /v:61.184.241.30:25788 /cert-ignore -sec-nla",
     (char*)userName.toLatin1().data(),(char*)pwd.toLatin1().data(),width,height);
     system(cmd);
 }

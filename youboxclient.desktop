@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=java -Djava.awt.headless=false -jar /home/yinpeng/youbox.jar
+Icon=/home/yinpeng/youbox.png
+Name=youboxclient
+Terminal=false
+Type=Application
+X-Deepin-Vendor=user-custom
