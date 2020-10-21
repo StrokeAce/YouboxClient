@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <qmap.h>
 #include "register.h"
+#include "agreement.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,10 +28,13 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_checkBox_Agree_clicked();
+
 private:
     Ui::MainWindow *ui;
     bool m_canLogin;
     QMap<QString,QString> m_mapConfig;
     Register m_reg;
+    Agreement m_agree;
 };
 #endif // MAINWINDOW_H

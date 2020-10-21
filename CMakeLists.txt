@@ -37,6 +37,9 @@ if(ANDROID)
     register.cpp
     register.h
     register.ui
+    agreement.cpp
+    agreement.h
+    agreement.ui
     RdpRemoteTools.pro
     ${TS_FILES}
   )
@@ -49,6 +52,9 @@ else()
     register.cpp
     register.h
     register.ui
+    agreement.cpp
+    agreement.h
+    agreement.ui
     RdpRemoteTools.pro
     images/login.qrc
     ${TS_FILES}

@@ -121,3 +121,14 @@ void MainWindow::on_pushButton_clicked()
     m_reg.setWindowModality(Qt::ApplicationModal);
     m_reg.show();
 }
+
+void MainWindow::on_checkBox_Agree_clicked()
+{
+    m_agree.setMaximumSize(QSize(320,366));
+    m_agree.setMinimumSize(QSize(320,366));
+    m_agree.setWindowFlags(Qt::WindowCloseButtonHint);
+    m_agree.setWindowTitle(QObject::tr("协议"));
+    m_agree.move ((QApplication::desktop()->width() - m_agree.width())/2,(QApplication::desktop()->height() - m_agree.height())/2);//窗口居中
+    m_agree.setWindowModality(Qt::ApplicationModal);
+    m_agree.show();
+}

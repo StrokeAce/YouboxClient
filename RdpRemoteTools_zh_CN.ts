@@ -2,6 +2,15 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="RdpRemoteTools_zh_CN">
 <context>
+    <name>Agreement</name>
+    <message>
+        <location filename="agreement.ui" line="14"/>
+        <location filename="build/youboxclient_autogen/include/ui_agreement.h" line="40"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="50"/>
@@ -72,6 +81,11 @@
         <location filename="mainwindow.cpp" line="119"/>
         <source>注册</source>
         <oldsource>  </oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="130"/>
+        <source>协议</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
