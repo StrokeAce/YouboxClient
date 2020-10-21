@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Test LANGUAGES CXX)
+project(youboxclient LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -29,7 +29,7 @@ find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 set(TS_FILES RdpRemoteTools_zh_CN.ts)
 
 if(ANDROID)
-  add_library(Test SHARED
+  add_library(youboxclient SHARED
     main.cpp
     mainwindow.cpp
     mainwindow.h
@@ -38,7 +38,7 @@ if(ANDROID)
     ${TS_FILES}
   )
 else()
-  add_executable(Test
+  add_executable(youboxclient
     main.cpp
     mainwindow.cpp
     mainwindow.h
@@ -49,6 +49,6 @@ else()
   )
 endif()
 
-target_link_libraries(Test PRIVATE Qt5::Widgets)
+target_link_libraries(youboxclient PRIVATE Qt5::Widgets)
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

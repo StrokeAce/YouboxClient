@@ -7,7 +7,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    
+    w.setMaximumSize(QSize(310,470));
+		w.setMinimumSize(QSize(310,470));
+		w.setWindowFlags(Qt::WindowCloseButtonHint);
+		w.setWindowTitle(QObject::tr(" "));
     w.show();
     w.move ((QApplication::desktop()->width() - w.width())/2,(QApplication::desktop()->height() - w.height())/2);//窗口居中
     return a.exec();

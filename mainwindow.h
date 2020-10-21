@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <qmap.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,8 +18,12 @@ public:
 
 private slots:
     void on_button_Login_clicked();
+    void ReadConfig();
+	void Init();
 
 private:
     Ui::MainWindow *ui;
+    bool m_canLogin;
+	QMap<QString,QString> m_mapConfig;
 };
 #endif // MAINWINDOW_H
