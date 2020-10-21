@@ -17,13 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    register.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    register.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    register.ui
 
 TRANSLATIONS += \
     RdpRemoteTools_zh_CN.ts

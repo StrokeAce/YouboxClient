@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,10 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Youbox</string>
+   <string notr="true"/>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background-color: white;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="lineEdit_UserName">
@@ -26,8 +26,11 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: 245,245,245;</string>
+    </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_2">
+   <widget class="QCheckBox" name="checkBox_Agree">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -36,14 +39,15 @@
       <height>31</height>
      </rect>
     </property>
-    <property name="text">
-     <string>我同意 兴和云用户服务协议及产权隐私声明</string>
-    </property>
     <property name="font">
      <font>
       <pointsize>9</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="text">
+     <string>我同意 兴和云用户服务协议及产权隐私声明</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_Pwd">
@@ -55,8 +59,11 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: 245,245,245;</string>
+    </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_Ico">
     <property name="geometry">
      <rect>
       <x>102</x>
@@ -72,7 +79,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="comboBox_ip">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -81,21 +88,11 @@
       <height>22</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>310</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>用户注册</string>
+    <property name="styleSheet">
+     <string notr="true">background-color: 245,245,245;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label_UserName">
     <property name="geometry">
      <rect>
       <x>22</x>
@@ -107,8 +104,11 @@
     <property name="text">
      <string>用户名\账号</string>
     </property>
-   </widget>   
+   </widget>
    <widget class="QPushButton" name="button_Login">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>65</x>
@@ -117,11 +117,14 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="text">
      <string>登录</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="label_Pwd">
     <property name="geometry">
      <rect>
       <x>22</x>
@@ -134,7 +137,7 @@
      <string>密码：</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_3">
+   <widget class="QCheckBox" name="checkBox_Pwd">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -149,14 +152,30 @@
     <property name="checked">
      <bool>true</bool>
     </property>
-   </widget>   
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>320</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>用户注册</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>450</width>
+     <width>310</width>
      <height>22</height>
     </rect>
    </property>

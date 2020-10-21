@@ -3,11 +3,13 @@
 
 #include <QMainWindow>
 #include <qmap.h>
+#include "register.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+class Register;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -21,9 +23,14 @@ private slots:
     void ReadConfig();
 	void Init();
 
+    void on_checkBox_Agree_stateChanged(int arg1);
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     bool m_canLogin;
-	QMap<QString,QString> m_mapConfig;
+    QMap<QString,QString> m_mapConfig;
+    Register m_reg;
 };
 #endif // MAINWINDOW_H

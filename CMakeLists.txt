@@ -34,6 +34,9 @@ if(ANDROID)
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    register.cpp
+    register.h
+    register.ui
     RdpRemoteTools.pro
     ${TS_FILES}
   )
@@ -43,6 +46,9 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    register.cpp
+    register.h
+    register.ui
     RdpRemoteTools.pro
     images/login.qrc
     ${TS_FILES}
