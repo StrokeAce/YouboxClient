@@ -38,7 +38,7 @@ border-style:outset;</string>
      <bool>false</bool>
     </property>
     <property name="placeholderText">
-     <string>用户名\账号</string>
+     <string>用户名/账号</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="checkBox_Agree">
@@ -123,9 +123,9 @@ border-style:outset;</string>
    <widget class="QComboBox" name="comboBox_ip">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>25</x>
       <y>230</y>
-      <width>271</width>
+      <width>274</width>
       <height>22</height>
      </rect>
     </property>
@@ -133,7 +133,17 @@ border-style:outset;</string>
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: 245,245,245;</string>
+     <string notr="true">QComboBox{ background:transparent; border-width:0; border-style:outset;}
+QComboBox::drop-down { subcontrol-origin: padding;subcontrol-position: top right; width: 15px;border:none; }
+QComboBox::down-arrow { image: url(:/close.png);}
+QComboBox QAbstractItemView{ height: 20px; margin-top: 23px;}
+QComboBox QAbstractItemView::item{height:25px; padding-left:0px; background:transparent;}
+QComboBox QAbstractItemView::item:hover{ background:transparent;}
+QComboBox QAbstractItemView::item:selected{ background:transparent;}
+</string>
+    </property>
+    <property name="currentIndex">
+     <number>-1</number>
     </property>
    </widget>
    <widget class="QLabel" name="label_UserName">
@@ -141,7 +151,7 @@ border-style:outset;</string>
      <rect>
       <x>25</x>
       <y>310</y>
-      <width>260</width>
+      <width>274</width>
       <height>1</height>
      </rect>
     </property>
@@ -182,7 +192,7 @@ border-style:outset;</string>
      <rect>
       <x>25</x>
       <y>360</y>
-      <width>260</width>
+      <width>274</width>
       <height>1</height>
      </rect>
     </property>
@@ -286,6 +296,25 @@ QCheckBox::indicator:checked:disabled{
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Ip_List">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>252</y>
+      <width>274</width>
+      <height>1</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/line.png);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

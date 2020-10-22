@@ -14,25 +14,27 @@
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="41"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="170"/>
-        <source>用户名\账号</source>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="214"/>
+        <source>用户名/账号</source>
+        <oldsource>  用户名/账号</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="104"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="172"/>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="216"/>
         <source>密码</source>
+        <oldsource>  密码</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="285"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="180"/>
+        <location filename="mainwindow.ui" line="323"/>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="224"/>
         <source>我同意这个条款了</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="244"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="178"/>
+        <location filename="mainwindow.ui" line="282"/>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="222"/>
         <source>用户注册</source>
         <translation type="unfinished"></translation>
     </message>
