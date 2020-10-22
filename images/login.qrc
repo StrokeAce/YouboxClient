@@ -4,6 +4,13 @@
         <file>bitbug_favicon.ico</file>
         <file>background.png</file>
         <file>register.png</file>
+        <file>close.png</file>
+        <file>logo.png</file>
+        <file>login.png</file>
+        <file>checked.png</file>
+        <file>uncheck.png</file>
+        <file>register_background.png</file>
+        <file>agree_background.png</file>
     </qresource>
-    <qresource prefix="/123" lang="123"/>
+    <qresource lang="123" prefix="/123"/>
 </RCC>

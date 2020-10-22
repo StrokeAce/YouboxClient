@@ -12,3 +12,9 @@ Register::~Register()
 {
     delete ui;
 }
+
+void Register::on_register_Close_clicked()
+{
+    close();
+}
+

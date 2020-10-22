@@ -80,7 +80,7 @@ void MainWindow::ReadConfig()
   
     while( line.length() > 0 )  
     {
-		int delimPos = line.find("=");
+        size_t delimPos = line.find("=");
 		std::string key = line.substr( 0, delimPos );
 		line.replace( 0, delimPos+1, "" );
 		m_mapConfig.insert(QString::fromStdString(key),QString::fromStdString(line));		
@@ -102,33 +102,30 @@ void MainWindow::on_checkBox_Agree_stateChanged(int arg1)
     if(arg1)
     {
         ui->button_Login->setEnabled(true);
-        ui->button_Login->setStyleSheet("background: rgb(30,144,255)");
     }
     else
     {
-        ui->button_Login->setStyleSheet("background: rgb(220,220,220)");
          ui->button_Login->setEnabled(false);
     }
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    m_reg.setMaximumSize(QSize(260,260));
-    m_reg.setMinimumSize(QSize(260,260));
-    m_reg.setWindowFlags(Qt::WindowCloseButtonHint);
-    m_reg.setWindowTitle(QObject::tr("注册"));
     m_reg.move ((QApplication::desktop()->width() - m_reg.width())/2,(QApplication::desktop()->height() - m_reg.height())/2);//窗口居中
     m_reg.setWindowModality(Qt::ApplicationModal);
+    m_reg.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
     m_reg.show();
 }
 
-void MainWindow::on_checkBox_Agree_clicked()
+void MainWindow::on_mainWindow_Close_clicked()
 {
-    m_agree.setMaximumSize(QSize(320,366));
-    m_agree.setMinimumSize(QSize(320,366));
-    m_agree.setWindowFlags(Qt::WindowCloseButtonHint);
-    m_agree.setWindowTitle(QObject::tr("协议"));
+    close();
+}
+
+void MainWindow::on_button_Turn_Agreement_clicked()
+{
     m_agree.move ((QApplication::desktop()->width() - m_agree.width())/2,(QApplication::desktop()->height() - m_agree.height())/2);//窗口居中
     m_agree.setWindowModality(Qt::ApplicationModal);
+    m_agree.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
     m_agree.show();
 }

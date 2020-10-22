@@ -17,6 +17,9 @@ public:
 signals:
 
 
+private slots:
+    void on_register_Close_clicked();
+
 private:
     Ui::Register *ui;
 };

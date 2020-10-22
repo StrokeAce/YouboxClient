@@ -6,21 +6,43 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
+    <width>538</width>
     <height>366</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#Agreement{background-image: url(:/agree_background.png);}</string>
+  </property>
   <widget class="QTextEdit" name="textEdit_Agreement">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>320</width>
-     <height>366</height>
+     <x>19</x>
+     <y>35</y>
+     <width>471</width>
+     <height>311</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="agreement_Close">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>10</y>
+     <width>15</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/close.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

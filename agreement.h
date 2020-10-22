@@ -14,6 +14,9 @@ public:
     Agreement(QWidget *parent = nullptr);
     ~Agreement();
 
+private slots:
+    void on_agreement_Close_clicked();
+
 private:
     Ui::Agreement *ui;
 };

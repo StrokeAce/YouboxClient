@@ -22,19 +22,16 @@
     <height>260</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">#Register{background-image: url(:/register_background.png);}</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>260</width>
-     <height>260</height>
+     <x>20</x>
+     <y>40</y>
+     <width>191</width>
+     <height>191</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -42,6 +39,25 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="register_Close">
+   <property name="geometry">
+    <rect>
+     <x>224</x>
+     <y>10</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/close.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

@@ -28,7 +28,9 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void on_checkBox_Agree_clicked();
+    void on_mainWindow_Close_clicked();
+
+    void on_button_Turn_Agreement_clicked();
 
 private:
     Ui::MainWindow *ui;
