@@ -6,44 +6,60 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>538</width>
-    <height>366</height>
+    <width>1000</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#Agreement{background-image: url(:/agree_background.png);}</string>
+   <string notr="true"/>
   </property>
-  <widget class="QTextEdit" name="textEdit_Agreement">
+  <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>19</x>
-     <y>35</y>
-     <width>471</width>
-     <height>311</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="agreement_Close">
-   <property name="geometry">
-    <rect>
-     <x>500</x>
-     <y>10</y>
-     <width>15</width>
-     <height>15</height>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>550</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(:/close.png);</string>
+    <string notr="true">#widget{background-image: url(:/agree_background.png);}</string>
    </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="flat">
-    <bool>true</bool>
-   </property>
+   <widget class="QTextEdit" name="textEdit_Agreement">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>931</width>
+      <height>501</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="agreement_Close">
+    <property name="geometry">
+     <rect>
+      <x>970</x>
+      <y>10</y>
+      <width>15</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/close.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

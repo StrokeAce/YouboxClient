@@ -5,7 +5,7 @@
     <name>Agreement</name>
     <message>
         <location filename="agreement.ui" line="14"/>
-        <location filename="build/youboxclient_autogen/include/ui_agreement.h" line="48"/>
+        <location filename="build/youboxclient_autogen/include/ui_agreement.h" line="54"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13,27 +13,27 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="216"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="164"/>
-        <source>用户注册</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="130"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="160"/>
+        <location filename="mainwindow.ui" line="41"/>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="170"/>
         <source>用户名\账号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="165"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="162"/>
-        <source>密码：</source>
+        <location filename="mainwindow.ui" line="104"/>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="172"/>
+        <source>密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="251"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="166"/>
+        <location filename="mainwindow.ui" line="285"/>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="180"/>
         <source>我同意这个条款了</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="244"/>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="178"/>
+        <source>用户注册</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

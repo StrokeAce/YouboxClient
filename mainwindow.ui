@@ -24,13 +24,21 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>298</y>
+      <y>290</y>
       <width>271</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: 245,245,245;</string>
+     <string notr="true">background:transparent;
+border-width:0;
+border-style:outset;</string>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="placeholderText">
+     <string>用户名\账号</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="checkBox_Agree">
@@ -79,13 +87,21 @@ QCheckBox::indicator:checked:disabled{
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>360</y>
+      <y>340</y>
       <width>271</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: 245,245,245;</string>
+     <string notr="true">background:transparent;
+border-width:0;
+border-style:outset;</string>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="placeholderText">
+     <string>密码</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_Ico">
@@ -113,6 +129,9 @@ QCheckBox::indicator:checked:disabled{
       <height>22</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: 245,245,245;</string>
     </property>
@@ -120,14 +139,20 @@ QCheckBox::indicator:checked:disabled{
    <widget class="QLabel" name="label_UserName">
     <property name="geometry">
      <rect>
-      <x>22</x>
-      <y>273</y>
-      <width>91</width>
-      <height>21</height>
+      <x>25</x>
+      <y>310</y>
+      <width>260</width>
+      <height>1</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/line.png);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
     <property name="text">
-     <string>用户名\账号</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="button_Login">
@@ -155,14 +180,17 @@ QCheckBox::indicator:checked:disabled{
    <widget class="QLabel" name="label_Pwd">
     <property name="geometry">
      <rect>
-      <x>22</x>
-      <y>335</y>
-      <width>71</width>
-      <height>16</height>
+      <x>25</x>
+      <y>360</y>
+      <width>260</width>
+      <height>1</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/line.png);</string>
+    </property>
     <property name="text">
-     <string>密码：</string>
+     <string/>
     </property>
    </widget>
    <widget class="QCheckBox" name="checkBox_Pwd">
@@ -228,6 +256,9 @@ QCheckBox::indicator:checked:disabled{
       <height>15</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-image: url(:/close.png);</string>
     </property>
@@ -246,6 +277,9 @@ QCheckBox::indicator:checked:disabled{
       <width>151</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="text">
      <string>我同意这个条款了</string>
