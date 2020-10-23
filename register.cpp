@@ -18,3 +18,4 @@ void Register::on_register_Close_clicked()
     close();
 }
 
+

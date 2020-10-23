@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>MessageBox</class>
+ <widget class="QWidget" name="MessageBox">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -58,6 +58,9 @@
       <width>102</width>
       <height>42</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">background-image: url(:/message_ok.png);</string>

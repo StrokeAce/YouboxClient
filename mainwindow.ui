@@ -100,6 +100,9 @@ border-style:outset;</string>
     <property name="frame">
      <bool>false</bool>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
     <property name="placeholderText">
      <string>密码</string>
     </property>
@@ -133,14 +136,10 @@ border-style:outset;</string>
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">QComboBox{ background:transparent; border-width:0; border-style:outset;}
+     <string notr="true">QComboBox{ background:transparent; border-width:0; border-style:outset;padding: 1px 2px 1px 2px;}
 QComboBox::drop-down { subcontrol-origin: padding;subcontrol-position: top right; width: 15px;border:none; }
 QComboBox::down-arrow { image: url(:/down_arrow.png);}
-QComboBox QAbstractItemView{ height: 20px; margin-top: 23px;}
-QComboBox QAbstractItemView::item{height:25px; padding-left:0px; background:transparent;}
-QComboBox QAbstractItemView::item:hover{ background:transparent;}
-QComboBox QAbstractItemView::item:selected{ background:transparent;}
-</string>
+QComboBox QAbstractItemView {background: rgb(255, 255, 255);selection-color:rgb(255, 0, 0);border: 1px solid red;outline: none;}</string>
     </property>
     <property name="currentIndex">
      <number>-1</number>

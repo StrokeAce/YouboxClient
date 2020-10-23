@@ -5,6 +5,13 @@
 #include <QMap>
 #include "register.h"
 #include "agreement.h"
+#include "messagebox.h"
+
+struct Info
+{
+    QString ip;
+    QString region;
+};
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,7 +31,9 @@ private slots:
     void ReadConfig();
     void WriteConfig();
     void ReadData();
-	void Init(); 
+    void Init();
+    QString Encry(QString pwd);
+    QString Decip(QString pwd);
 
     void on_checkBox_Agree_stateChanged(int arg1);
 
@@ -39,9 +48,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
     bool m_canLogin;
-    QMap<QString,QString> m_mapIpList;
+    QMap<QString,Info> m_mapIpList;
     Register m_reg;
     Agreement m_agree;
+    MessageBox m_box;
     bool m_bSavePwd;
     bool m_bAgree;
 };

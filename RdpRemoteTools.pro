@@ -19,11 +19,13 @@ SOURCES += \
     agreement.cpp \
     main.cpp \
     mainwindow.cpp \
+    messagebox.cpp \
     register.cpp
 
 HEADERS += \
     agreement.h \
     mainwindow.h \
+    messagebox.h \
     register.h
 
 FORMS += \

@@ -40,6 +40,9 @@ if(ANDROID)
     agreement.cpp
     agreement.h
     agreement.ui
+    messagebox.cpp
+    messagebox.h
+    messagebox.ui
     RdpRemoteTools.pro
     ${TS_FILES}
   )
@@ -55,6 +58,9 @@ else()
     agreement.cpp
     agreement.h
     agreement.ui
+    messagebox.cpp
+    messagebox.h
+    messagebox.ui
     RdpRemoteTools.pro
     images/login.qrc
     ${TS_FILES}

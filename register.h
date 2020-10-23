@@ -14,9 +14,6 @@ public:
     Register(QWidget *parent = nullptr);
     ~Register();
 
-signals:
-
-
 private slots:
     void on_register_Close_clicked();
 

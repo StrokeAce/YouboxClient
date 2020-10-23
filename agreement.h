@@ -17,6 +17,8 @@ public:
 private slots:
     void on_agreement_Close_clicked();
 
+    void ReadData();
+
 private:
     Ui::Agreement *ui;
 };

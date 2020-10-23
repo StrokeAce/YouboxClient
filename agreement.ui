@@ -37,6 +37,13 @@
       <height>501</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTextEdit{ background:transparent; border-width:0; border-style:outset;};
+</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="agreement_Close">
     <property name="geometry">

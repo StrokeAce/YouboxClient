@@ -1,9 +1,9 @@
 #include "mainwindow.h"
-#include <QMessageBox>
 #include <QDesktopWidget>
 #include <QVariant>
 #include <QSettings>
 #include <QFile>
+#include <QDebug>
 #include "ui_mainwindow.h"
 
 #define DEF_GET_STATE(bCheck) (bCheck ? Qt::Checked : Qt::Unchecked)
@@ -37,6 +37,13 @@ void MainWindow::ReadConfig()
     QSettings setting(path, QSettings::IniFormat);
     m_bSavePwd = setting.value("save_pwd", false).toBool();
     m_bAgree = setting.value("agree", false).toBool();
+    QString user = setting.value("user").toString();
+    QString pwd = setting.value("pwd").toString();
+    if(m_bSavePwd)
+    {
+        ui->lineEdit_UserName->setText(Decip(user));
+        ui->lineEdit_Pwd->setText(Decip(pwd));
+    }
 }
 
 void MainWindow::WriteConfig()
@@ -45,6 +52,12 @@ void MainWindow::WriteConfig()
     QSettings setting(path, QSettings::IniFormat);
     setting.setValue("save_pwd", m_bSavePwd);
     setting.setValue("agree", m_bAgree);
+
+    if(m_bSavePwd)
+    {
+        setting.setValue("user", Encry(ui->lineEdit_UserName->text()));
+        setting.setValue("pwd", Encry(ui->lineEdit_Pwd->text()));
+    }
 }
 
 void MainWindow::ReadData()
@@ -61,16 +74,36 @@ void MainWindow::ReadData()
             if(!line.isEmpty())
             {
                 QString name = line.section("=", 0, 0);
-                QString ip = line.section("=", 1, 1);
-                m_mapIpList.insert(name,ip);
-                printf("%s,%s\n",name.toStdString().c_str(),ip.toStdString().c_str());
+                Info in;
+                in.ip = line.section("=", 1, 1);
+                in.region = line.section("=", 2, 2);
+                m_mapIpList.insert(name,in);
             }
-
         }
     }
 
-    for(QMap<QString,QString>::ConstIterator ite=m_mapIpList.constBegin(); ite!=m_mapIpList.constEnd(); ++ite)
+    for(QMap<QString,Info>::ConstIterator ite=m_mapIpList.constBegin(); ite!=m_mapIpList.constEnd(); ++ite)
                 ui->comboBox_ip->addItem(ite.key());
+}
+
+QString MainWindow::Encry(QString pwd)
+{
+    QByteArray baPw = pwd.toUtf8();
+    for (int i = 0;i<baPw.size();i++)
+    {
+        baPw[i] = baPw[i]+66;//加密User1的密码
+    }
+    return baPw;
+}
+
+QString MainWindow::Decip(QString pwd)
+{
+    QByteArray baPw = pwd.toUtf8();
+    for (int i = 0;i<baPw.size();i++)
+    {
+        baPw[i] = baPw[i]-66;//解密User1的密码
+    }
+    return baPw;
 }
 
 void MainWindow::on_button_Login_clicked()
@@ -84,7 +117,11 @@ void MainWindow::on_button_Login_clicked()
 
     if(userName.isEmpty())
     {
-        QMessageBox::warning(NULL, "提示", "请填写账号!",QMessageBox::Ok);
+        m_box.move ((QApplication::desktop()->width() - m_reg.width())/2,(QApplication::desktop()->height() - m_reg.height())/2);//窗口居中
+        m_box.setWindowModality(Qt::ApplicationModal);
+        m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+        m_box.ChangeTips(1);
+        m_box.show();
         return;
     }
 
@@ -92,39 +129,44 @@ void MainWindow::on_button_Login_clicked()
 
     if(pwd.isEmpty())
     {
-        QMessageBox::warning(NULL, "提示", "请填写密码!",QMessageBox::Ok);
+        m_box.move ((QApplication::desktop()->width() - m_reg.width())/2,(QApplication::desktop()->height() - m_reg.height())/2);//窗口居中
+        m_box.setWindowModality(Qt::ApplicationModal);
+        m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+        m_box.ChangeTips(2);
+        m_box.show();
         return;
     }
 
-        QString key = ui->comboBox_ip->currentText();
+    QString key = ui->comboBox_ip->currentText();
 
 	if(key.isEmpty())
-	{
-		QMessageBox::warning(NULL, "提示", "软件异常!",QMessageBox::Ok);
+    {
 		return;
 	}
 
 	QString ip = "";
-	QMap<QString,QString>::Iterator iter;
+    QString region = "";
+    QMap<QString,Info>::Iterator iter;
     iter = m_mapIpList.find(key);
     if(iter != m_mapIpList.end())
-		ip = iter.value();
+    {
+        ip = iter.value().ip;
+        region = iter.value().region;
+    }
 
-	if(ip.isEmpty())
+    if(ip.isEmpty() || region.isEmpty())
 	{
-		QMessageBox::warning(NULL, "提示", "软件异常!",QMessageBox::Ok);
 		return;
 	}
     
-    int width = QApplication::desktop()->width() - 80;//远程界面的高减少80是为了防止本地任务栏会遮挡远程的任务栏
-    int height = QApplication::desktop()->height();
+    int width = QApplication::desktop()->width();
+    int height = QApplication::desktop()->height() - 80;//远程界面的高减少80是为了防止本地任务栏会遮挡远程的任务栏
 
     QString execPath = QCoreApplication::applicationDirPath();
 
     QString cmd;
-    cmd = execPath + "/freerdp /u:" + userName + " /p:" + pwd + " /d:src /w:" + QString::number(width) + " /h:" + QString::number(height) + " /v:" + ip + " /cert-ignore -sec-nla";
-    
-	system((char*)(cmd.toLatin1().data()));
+    cmd = execPath + "/freerdp /u:" + userName + " /p:" + pwd + " /d:" + region+ " /w:" + QString::number(width) + " /h:" + QString::number(height) + " /v:" + ip + " /cert-ignore -sec-nla";
+    system((char*)(cmd.toLatin1().data()));
 }
 
 void MainWindow::on_checkBox_Agree_stateChanged(int arg1)
