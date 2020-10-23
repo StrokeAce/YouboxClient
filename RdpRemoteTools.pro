@@ -29,6 +29,7 @@ HEADERS += \
 FORMS += \
     agreement.ui \
     mainwindow.ui \
+    messagebox.ui \
     register.ui
 
 TRANSLATIONS += \

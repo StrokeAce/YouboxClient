@@ -107,10 +107,10 @@ border-style:outset;</string>
    <widget class="QLabel" name="label_Ico">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>132</x>
       <y>110</y>
       <width>67</width>
-      <height>62</height>
+      <height>67</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -135,7 +135,7 @@ border-style:outset;</string>
     <property name="styleSheet">
      <string notr="true">QComboBox{ background:transparent; border-width:0; border-style:outset;}
 QComboBox::drop-down { subcontrol-origin: padding;subcontrol-position: top right; width: 15px;border:none; }
-QComboBox::down-arrow { image: url(:/close.png);}
+QComboBox::down-arrow { image: url(:/down_arrow.png);}
 QComboBox QAbstractItemView{ height: 20px; margin-top: 23px;}
 QComboBox QAbstractItemView::item{height:25px; padding-left:0px; background:transparent;}
 QComboBox QAbstractItemView::item:hover{ background:transparent;}
@@ -246,12 +246,15 @@ QCheckBox::indicator:checked:disabled{
      <rect>
       <x>210</x>
       <y>400</y>
-      <width>75</width>
-      <height>23</height>
+      <width>58</width>
+      <height>15</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/register_forward_hover.png);</string>
+    </property>
     <property name="text">
-     <string>用户注册</string>
+     <string/>
     </property>
     <property name="flat">
      <bool>true</bool>
@@ -282,17 +285,20 @@ QCheckBox::indicator:checked:disabled{
    <widget class="QPushButton" name="button_Turn_Agreement">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>430</y>
-      <width>151</width>
-      <height>31</height>
+      <x>95</x>
+      <y>440</y>
+      <width>218</width>
+      <height>14</height>
      </rect>
     </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/agreement_forward.png);</string>
+    </property>
     <property name="text">
-     <string>我同意这个条款了</string>
+     <string/>
     </property>
     <property name="flat">
      <bool>true</bool>
@@ -312,6 +318,38 @@ QCheckBox::indicator:checked:disabled{
     </property>
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>45</x>
+      <y>440</y>
+      <width>42</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/agree.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>45</x>
+      <y>400</y>
+      <width>56</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/save_pwd.png);</string>
     </property>
     <property name="text">
      <string/>

@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <qmap.h>
+#include <QMap>
 #include "register.h"
 #include "agreement.h"
 
@@ -22,7 +22,9 @@ public:
 private slots:
     void on_button_Login_clicked();
     void ReadConfig();
-	void Init();
+    void WriteConfig();
+    void ReadData();
+	void Init(); 
 
     void on_checkBox_Agree_stateChanged(int arg1);
 
@@ -32,11 +34,15 @@ private slots:
 
     void on_button_Turn_Agreement_clicked();
 
+    void on_checkBox_Pwd_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     bool m_canLogin;
-    QMap<QString,QString> m_mapConfig;
+    QMap<QString,QString> m_mapIpList;
     Register m_reg;
     Agreement m_agree;
+    bool m_bSavePwd;
+    bool m_bAgree;
 };
 #endif // MAINWINDOW_H

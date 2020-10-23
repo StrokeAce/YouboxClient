@@ -11,6 +11,15 @@
         <file>register_background.png</file>
         <file>agree_background.png</file>
         <file>line.png</file>
+        <file>down_arrow.png</file>
+        <file>agreement_forward.png</file>
+        <file>agree.png</file>
+        <file>register_forward_hover.png</file>
+        <file>register_tip.png</file>
+        <file>message_ok.png</file>
+        <file>message_pwd.png</file>
+        <file>message_user.png</file>
+        <file>save_pwd.png</file>
     </qresource>
-    <qresource prefix="/123" lang="123"/>
+    <qresource lang="123" prefix="/123"/>
 </RCC>

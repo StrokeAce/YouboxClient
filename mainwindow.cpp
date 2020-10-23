@@ -1,9 +1,12 @@
 #include "mainwindow.h"
 #include <QMessageBox>
 #include <QDesktopWidget>
-#include <fstream> 
-#include <string>
+#include <QVariant>
+#include <QSettings>
+#include <QFile>
 #include "ui_mainwindow.h"
+
+#define DEF_GET_STATE(bCheck) (bCheck ? Qt::Checked : Qt::Unchecked)
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,6 +20,57 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::Init()
+{
+    ReadConfig();
+    ReadData();
+
+    ui->checkBox_Pwd->setCheckState(DEF_GET_STATE(m_bSavePwd));
+    ui->checkBox_Agree->setCheckState(DEF_GET_STATE(m_bAgree));
+}
+
+void MainWindow::ReadConfig()
+{
+    QString path = QCoreApplication::applicationDirPath() + "/config.ini";
+    QSettings setting(path, QSettings::IniFormat);
+    m_bSavePwd = setting.value("save_pwd", false).toBool();
+    m_bAgree = setting.value("agree", false).toBool();
+}
+
+void MainWindow::WriteConfig()
+{
+    QString path = QCoreApplication::applicationDirPath() + "/config.ini";
+    QSettings setting(path, QSettings::IniFormat);
+    setting.setValue("save_pwd", m_bSavePwd);
+    setting.setValue("agree", m_bAgree);
+}
+
+void MainWindow::ReadData()
+{
+    QString path = QCoreApplication::applicationDirPath() + "/data.ini";
+
+    QFile file(path);
+    bool isOK = file.open(QIODevice::ReadOnly);
+    if(isOK == true)
+    {
+        while (file.atEnd() == false)
+        {
+            QString line = file.readLine();
+            if(!line.isEmpty())
+            {
+                QString name = line.section("=", 0, 0);
+                QString ip = line.section("=", 1, 1);
+                m_mapIpList.insert(name,ip);
+                printf("%s,%s\n",name.toStdString().c_str(),ip.toStdString().c_str());
+            }
+
+        }
+    }
+
+    for(QMap<QString,QString>::ConstIterator ite=m_mapIpList.constBegin(); ite!=m_mapIpList.constEnd(); ++ite)
+                ui->comboBox_ip->addItem(ite.key());
 }
 
 void MainWindow::on_button_Login_clicked()
@@ -52,8 +106,8 @@ void MainWindow::on_button_Login_clicked()
 
 	QString ip = "";
 	QMap<QString,QString>::Iterator iter;
-	iter = m_mapConfig.find(key);
-	if(iter != m_mapConfig.end())
+    iter = m_mapIpList.find(key);
+    if(iter != m_mapIpList.end())
 		ip = iter.value();
 
 	if(ip.isEmpty())
@@ -65,36 +119,12 @@ void MainWindow::on_button_Login_clicked()
     int width = QApplication::desktop()->width() - 80;//远程界面的高减少80是为了防止本地任务栏会遮挡远程的任务栏
     int height = QApplication::desktop()->height();
 
+    QString execPath = QCoreApplication::applicationDirPath();
+
     QString cmd;
-    cmd = "/home/youboxclient/freerdp /u:" + userName + " /p:" + pwd + " /d:src /w:" + QString::number(width) + " /h:" + QString::number(height) + " /v:" + ip + " /cert-ignore -sec-nla";
+    cmd = execPath + "/freerdp /u:" + userName + " /p:" + pwd + " /d:src /w:" + QString::number(width) + " /h:" + QString::number(height) + " /v:" + ip + " /cert-ignore -sec-nla";
     
 	system((char*)(cmd.toLatin1().data()));
-}
-
-void MainWindow::ReadConfig()
-{
-	std::ifstream file("/home/youboxclient/config.ini");
- 
-	std::string line = "";
-	std::getline( file, line );
-  
-    while( line.length() > 0 )  
-    {
-        size_t delimPos = line.find("=");
-		std::string key = line.substr( 0, delimPos );
-		line.replace( 0, delimPos+1, "" );
-		m_mapConfig.insert(QString::fromStdString(key),QString::fromStdString(line));		
-		line = "";
-        std::getline( file, line );
-	}        
-}
-
-void MainWindow::Init()
-{
-	ReadConfig();
-
-	for(QMap<QString,QString>::ConstIterator ite=m_mapConfig.constBegin(); ite!=m_mapConfig.constEnd(); ++ite)
-                ui->comboBox_ip->addItem(ite.key());
 }
 
 void MainWindow::on_checkBox_Agree_stateChanged(int arg1)
@@ -102,10 +132,12 @@ void MainWindow::on_checkBox_Agree_stateChanged(int arg1)
     if(arg1)
     {
         ui->button_Login->setEnabled(true);
+        m_bAgree = true;
     }
     else
     {
          ui->button_Login->setEnabled(false);
+         m_bAgree = false;
     }
 }
 
@@ -119,6 +151,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_mainWindow_Close_clicked()
 {
+    WriteConfig();
     close();
 }
 
@@ -128,4 +161,16 @@ void MainWindow::on_button_Turn_Agreement_clicked()
     m_agree.setWindowModality(Qt::ApplicationModal);
     m_agree.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
     m_agree.show();
+}
+
+void MainWindow::on_checkBox_Pwd_stateChanged(int arg1)
+{
+    if(arg1)
+    {
+        m_bSavePwd = true;
+    }
+    else
+    {
+        m_bSavePwd = false;
+    }
 }
