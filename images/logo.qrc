@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/we" lang="w"/>
-    <qresource prefix="/">
-        <file>20201017163050.png</file>
-    </qresource>
-</RCC>
