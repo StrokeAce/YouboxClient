@@ -110,7 +110,7 @@ void MainWindow::on_button_Login_clicked()
 {
     if(!ui->checkBox_Agree->isChecked())
     {
-    	return;
+        return;
     }
 	
     QString userName = ui->lineEdit_UserName->text();
@@ -174,11 +174,13 @@ void MainWindow::on_checkBox_Agree_stateChanged(int arg1)
     if(arg1)
     {
         ui->button_Login->setEnabled(true);
+        ui->button_Login->setStyleSheet("background-image: url(:/login.png);");
         m_bAgree = true;
     }
     else
     {
          ui->button_Login->setEnabled(false);
+         ui->button_Login->setStyleSheet("background-image: url(:/unlogin.png);");
          m_bAgree = false;
     }
 }

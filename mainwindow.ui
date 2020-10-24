@@ -177,7 +177,7 @@ QComboBox QAbstractItemView {background: rgb(255, 255, 255);selection-color:rgb(
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/login.png);</string>
+     <string notr="true">background-image: url(:/unlogin.png);</string>
     </property>
     <property name="text">
      <string/>

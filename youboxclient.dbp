@@ -32,7 +32,8 @@ Description: 兴和云远程桌面工具
 sudo rm -rf /opt/youboxclient
 <</PREINST>>
 <<POSTINST>>
-0
+1
+sudo chmod -R 777 /opt/youboxclient 
 <</POSTINST>>
 <<PRERM>>
 0

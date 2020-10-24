@@ -20,6 +20,7 @@
         <file>message_pwd.png</file>
         <file>message_user.png</file>
         <file>save_pwd.png</file>
+        <file>unlogin.png</file>
     </qresource>
-    <qresource lang="123" prefix="/123"/>
+    <qresource prefix="/123" lang="123"/>
 </RCC>
