@@ -14,12 +14,46 @@ MainWindow::MainWindow(QWidget *parent)
     , m_canLogin(false)
 {
     ui->setupUi(this);
+    m_move = false;
     Init();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    //当鼠标左键点击时.
+    if (event->button() == Qt::LeftButton)
+    {
+        m_move = true;
+        //记录鼠标的世界坐标.
+        m_startPoint = event->globalPos();
+        //记录窗体的世界坐标.
+        m_windowPoint = this->frameGeometry().topLeft();
+    }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        //移动中的鼠标位置相对于初始位置的相对位置.
+        QPoint relativePos = event->globalPos() - m_startPoint;
+        //然后移动窗体即可.
+        this->move(m_windowPoint + relativePos );
+    }
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        //改变移动状态.
+        m_move = false;
+    }
 }
 
 void MainWindow::Init()
@@ -117,7 +151,7 @@ void MainWindow::on_button_Login_clicked()
 
     if(userName.isEmpty())
     {
-        m_box.move ((QApplication::desktop()->width() - m_reg.width())/2,(QApplication::desktop()->height() - m_reg.height())/2);//窗口居中
+        m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
         m_box.setWindowModality(Qt::ApplicationModal);
         m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
         m_box.ChangeTips(1);
@@ -129,7 +163,7 @@ void MainWindow::on_button_Login_clicked()
 
     if(pwd.isEmpty())
     {
-        m_box.move ((QApplication::desktop()->width() - m_reg.width())/2,(QApplication::desktop()->height() - m_reg.height())/2);//窗口居中
+        m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
         m_box.setWindowModality(Qt::ApplicationModal);
         m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
         m_box.ChangeTips(2);
@@ -187,7 +221,7 @@ void MainWindow::on_checkBox_Agree_stateChanged(int arg1)
 
 void MainWindow::on_pushButton_clicked()
 {
-    m_reg.move ((QApplication::desktop()->width() - m_reg.width())/2,(QApplication::desktop()->height() - m_reg.height())/2);//窗口居中
+    m_reg.move(geometry().x() + 40, geometry().y() + 140);//窗口居中
     m_reg.setWindowModality(Qt::ApplicationModal);
     m_reg.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
     m_reg.show();
@@ -201,7 +235,9 @@ void MainWindow::on_mainWindow_Close_clicked()
 
 void MainWindow::on_button_Turn_Agreement_clicked()
 {
-    m_agree.move ((QApplication::desktop()->width() - m_agree.width())/2,(QApplication::desktop()->height() - m_agree.height())/2);//窗口居中
+    int rightX = geometry().x() - 335 + 1000;
+    int leftX = QApplication::desktop()->width() > rightX ? (geometry().x() - 335) : (QApplication::desktop()->width() - 1000);
+    m_agree.move(leftX, geometry().y());//窗口居中
     m_agree.setWindowModality(Qt::ApplicationModal);
     m_agree.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
     m_agree.show();

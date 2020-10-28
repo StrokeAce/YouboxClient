@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMap>
+#include <QMouseEvent>
 #include "register.h"
 #include "agreement.h"
 #include "messagebox.h"
@@ -26,14 +27,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+
 private slots:
     void on_button_Login_clicked();
-    void ReadConfig();
-    void WriteConfig();
-    void ReadData();
-    void Init();
-    QString Encry(QString pwd);
-    QString Decip(QString pwd);
 
     void on_checkBox_Agree_stateChanged(int arg1);
 
@@ -46,13 +46,24 @@ private slots:
     void on_checkBox_Pwd_stateChanged(int arg1);
 
 private:
+    void ReadConfig();
+    void WriteConfig();
+    void ReadData();
+    void Init();
+    QString Encry(QString pwd);
+    QString Decip(QString pwd);
+
+private:
     Ui::MainWindow *ui;
-    bool m_canLogin;
-    QMap<QString,Info> m_mapIpList;
-    Register m_reg;
-    Agreement m_agree;
-    MessageBox m_box;
-    bool m_bSavePwd;
-    bool m_bAgree;
+    bool                m_canLogin;
+    QMap<QString,Info>  m_mapIpList;
+    Register            m_reg;
+    Agreement           m_agree;
+    MessageBox          m_box;
+    bool                m_bSavePwd;
+    bool                m_bAgree;
+    bool                m_move;
+    QPoint              m_startPoint;
+    QPoint              m_windowPoint;
 };
 #endif // MAINWINDOW_H

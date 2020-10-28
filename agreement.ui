@@ -26,7 +26,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">#widget{background-image: url(:/agree_background.png);}</string>
+    <string notr="true">#widget{background-image: url(:/agree_background.png);
+border:1px solid red;}</string>
    </property>
    <widget class="QTextEdit" name="textEdit_Agreement">
     <property name="geometry">

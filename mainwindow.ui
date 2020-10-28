@@ -10,6 +10,18 @@
     <height>550</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>550</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>570</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string notr="true"/>
   </property>
@@ -20,6 +32,21 @@
    <string notr="true">#MainWindow{background-image: url(:/background.png);}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>550</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>550</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <widget class="QLineEdit" name="lineEdit_UserName">
     <property name="geometry">
      <rect>
@@ -170,7 +197,7 @@ QComboBox QAbstractItemView {background: rgb(255, 255, 255);selection-color:rgb(
     </property>
     <property name="geometry">
      <rect>
-      <x>25</x>
+      <x>28</x>
       <y>470</y>
       <width>274</width>
       <height>40</height>

@@ -23,7 +23,6 @@ void MessageBox::ChangeTips(int type)
     else if(2 == type)
     {
         ui->widget->setStyleSheet("background-image: url(:/message_pwd.png);");
-
     }
 }
 

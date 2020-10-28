@@ -23,7 +23,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(:/register_background.png);</string>
+    <string notr="true">#widget{background-image: url(:/register_background.png);
+border:1px solid red;}</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">

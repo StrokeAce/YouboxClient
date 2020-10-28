@@ -5,7 +5,7 @@
     <name>Agreement</name>
     <message>
         <location filename="agreement.ui" line="14"/>
-        <location filename="build/youboxclient_autogen/include/ui_agreement.h" line="57"/>
+        <location filename="build/youboxclient_autogen/include/ui_agreement.h" line="58"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13,15 +13,15 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="41"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="195"/>
+        <location filename="mainwindow.ui" line="68"/>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="200"/>
         <source>用户名/账号</source>
         <oldsource>  用户名/账号</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="107"/>
-        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="197"/>
+        <location filename="mainwindow.ui" line="134"/>
+        <location filename="build/youboxclient_autogen/include/ui_mainwindow.h" line="202"/>
         <source>密码</source>
         <oldsource>  密码</oldsource>
         <translation type="unfinished"></translation>
@@ -31,7 +31,7 @@
     <name>MessageBox</name>
     <message>
         <location filename="messagebox.ui" line="14"/>
-        <location filename="build/youboxclient_autogen/include/ui_messagebox.h" line="56"/>
+        <location filename="build/youboxclient_autogen/include/ui_messagebox.h" line="58"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
