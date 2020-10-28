@@ -1,4 +1,6 @@
 QT       += core gui
+#标记 网络
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

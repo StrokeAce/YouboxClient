@@ -311,7 +311,7 @@ QCheckBox::indicator:checked:disabled{
    <widget class="QPushButton" name="button_Turn_Agreement">
     <property name="geometry">
      <rect>
-      <x>95</x>
+      <x>90</x>
       <y>440</y>
       <width>218</width>
       <height>14</height>

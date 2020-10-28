@@ -31,7 +31,7 @@
     <name>MessageBox</name>
     <message>
         <location filename="messagebox.ui" line="14"/>
-        <location filename="build/youboxclient_autogen/include/ui_messagebox.h" line="58"/>
+        <location filename="build/youboxclient_autogen/include/ui_messagebox.h" line="71"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>

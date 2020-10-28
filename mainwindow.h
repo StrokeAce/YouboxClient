@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QMap>
 #include <QMouseEvent>
+#include <QtNetwork/QNetworkReply>
 #include "register.h"
 #include "agreement.h"
 #include "messagebox.h"
@@ -45,11 +46,14 @@ private slots:
 
     void on_checkBox_Pwd_stateChanged(int arg1);
 
+    /*void ReplyFinish(QNetworkReply *reply);*/
+
 private:
     void ReadConfig();
     void WriteConfig();
     void ReadData();
     void Init();
+    void SendUrl(QString userName);
     QString Encry(QString pwd);
     QString Decip(QString pwd);
 

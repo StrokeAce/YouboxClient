@@ -14,7 +14,8 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">#widget{background-image: url(:/messagebox.png);
+border:1px solid red;}</string>
   </property>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
@@ -29,8 +30,7 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">#widget{background-image: url(:/message_user.png);
-border:1px solid red;}</string>
+    <string notr="true"/>
    </property>
    <widget class="QPushButton" name="mainWindow_Close">
     <property name="geometry">
@@ -74,6 +74,35 @@ border:1px solid red;}</string>
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

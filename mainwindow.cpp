@@ -1,9 +1,14 @@
 #include "mainwindow.h"
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
 #include <QDesktopWidget>
+#include <QtNetwork/QTcpSocket>
+#include <QtNetwork/QTcpServer>
 #include <QVariant>
 #include <QSettings>
 #include <QFile>
 #include <QDebug>
+#include <QUrl>
 #include "ui_mainwindow.h"
 
 #define DEF_GET_STATE(bCheck) (bCheck ? Qt::Checked : Qt::Unchecked)
@@ -140,6 +145,111 @@ QString MainWindow::Decip(QString pwd)
     return baPw;
 }
 
+void MainWindow::SendUrl(QString userName)
+{
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    QNetworkRequest request;
+
+    // 发送https请求前准备工作;
+    QSslConfiguration config;
+    QSslConfiguration conf = request.sslConfiguration();
+    conf.setPeerVerifyMode(QSslSocket::VerifyNone);
+    conf.setProtocol(QSsl::TlsV1SslV3);
+    request.setSslConfiguration(conf);
+
+    QString url = "http://61.184.241.30:20000/api/Authority/SearchUser?UserId=" + userName;
+    request.setUrl(QUrl(url));
+    manager->get(request);
+    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinish(QNetworkReply*)));
+}
+
+/*void MainWindow::ReplyFinish(QNetworkReply *reply)
+{
+    if(reply && reply->error() == QNetworkReply::NoError)
+    {
+        QByteArray data = reply->readAll();
+        QString reply=QString::fromStdString(data.toStdString());
+
+        if(reply == "true")
+        {
+            QString pwd = ui->lineEdit_Pwd->text();
+            QString userName = ui->lineEdit_UserName->text();
+            QString userEnd = userName.right(6);
+            if(userEnd != pwd)
+            {
+                m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
+                m_box.setWindowModality(Qt::ApplicationModal);
+                m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+                m_box.ChangeTips(6);
+                m_box.show();
+                return;
+            }
+
+            QString key = ui->comboBox_ip->currentText();
+
+            if(key.isEmpty())
+            {
+                m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
+                m_box.setWindowModality(Qt::ApplicationModal);
+                m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+                m_box.ChangeTips(4);
+                m_box.show();
+                return;
+            }
+
+            QString ip = "";
+            QString region = "";
+            QMap<QString,Info>::Iterator iter;
+            iter = m_mapIpList.find(key);
+            if(iter != m_mapIpList.end())
+            {
+                ip = iter.value().ip;
+                region = iter.value().region;
+            }
+
+            if(ip.isEmpty() || region.isEmpty())
+            {
+                m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
+                m_box.setWindowModality(Qt::ApplicationModal);
+                m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+                m_box.ChangeTips(4);
+                m_box.show();
+                return;
+            }
+
+            int width = QApplication::desktop()->width();
+            int height = QApplication::desktop()->height() - 80;//远程界面的高减少80是为了防止本地任务栏会遮挡远程的任务栏
+
+            QString execPath = QCoreApplication::applicationDirPath();
+            QString cmd;
+            cmd = execPath + "/freerdp /u:" + userName + " /p:" + pwd + " /d:" + region+ " /w:" + QString::number(width) + " /h:" + QString::number(height) + " /v:" + ip + " /cert-ignore -sec-nla";
+            system((char*)(cmd.toLatin1().data()));
+        }
+        else
+        {
+            // 返回false
+            m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
+            m_box.setWindowModality(Qt::ApplicationModal);
+            m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+            m_box.ChangeTips(5);
+            m_box.show();
+            return;
+        }
+    }
+    else
+    {
+        // url无响应
+        m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
+        m_box.setWindowModality(Qt::ApplicationModal);
+        m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+        m_box.ChangeTips(3);
+        m_box.show();
+        return;
+    }
+    reply->close();
+}*/
+
+// 登录事件响应
 void MainWindow::on_button_Login_clicked()
 {
     if(!ui->checkBox_Agree->isChecked())
@@ -171,36 +281,7 @@ void MainWindow::on_button_Login_clicked()
         return;
     }
 
-    QString key = ui->comboBox_ip->currentText();
-
-	if(key.isEmpty())
-    {
-		return;
-	}
-
-	QString ip = "";
-    QString region = "";
-    QMap<QString,Info>::Iterator iter;
-    iter = m_mapIpList.find(key);
-    if(iter != m_mapIpList.end())
-    {
-        ip = iter.value().ip;
-        region = iter.value().region;
-    }
-
-    if(ip.isEmpty() || region.isEmpty())
-	{
-		return;
-	}
-    
-    int width = QApplication::desktop()->width();
-    int height = QApplication::desktop()->height() - 80;//远程界面的高减少80是为了防止本地任务栏会遮挡远程的任务栏
-
-    QString execPath = QCoreApplication::applicationDirPath();
-
-    QString cmd;
-    cmd = execPath + "/freerdp /u:" + userName + " /p:" + pwd + " /d:" + region+ " /w:" + QString::number(width) + " /h:" + QString::number(height) + " /v:" + ip + " /cert-ignore -sec-nla";
-    system((char*)(cmd.toLatin1().data()));
+    SendUrl(userName);
 }
 
 void MainWindow::on_checkBox_Agree_stateChanged(int arg1)
