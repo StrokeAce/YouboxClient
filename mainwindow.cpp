@@ -174,9 +174,11 @@ void MainWindow::ReplyFinish(QNetworkReply *reply)
     if(reply && reply->error() == QNetworkReply::NoError)
     {
         QByteArray data = reply->readAll();
-        QString reply=QString::fromStdString(data.toStdString());
+        QString reStr = QString::fromStdString(data.toStdString());
 
-        if(reply == "true")
+        reply->close();
+
+        if(reStr == "true")
         {
             QString pwd = ui->lineEdit_Pwd->text();
             QString userName = ui->lineEdit_UserName->text();
@@ -224,10 +226,16 @@ void MainWindow::ReplyFinish(QNetworkReply *reply)
                     (char*)region.toLatin1().data(),
                     width,height,
                     (char*)ip.toLatin1().data());
-            system(cmd);
+
+            FILE *fp = NULL;
+            fp = popen(cmd, "r");
+            if(NULL == fp)
+            {
+                ShowBox(4);
+                return;
+            }
             m_bInLogin = false;
             WriteConfig();
-            hide();
             close();
         }
         else
@@ -237,7 +245,6 @@ void MainWindow::ReplyFinish(QNetworkReply *reply)
             return;
         }
     }
-    reply->close();
 }
 
 // 定时触发
