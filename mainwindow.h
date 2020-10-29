@@ -46,7 +46,9 @@ private slots:
 
     void on_checkBox_Pwd_stateChanged(int arg1);
 
-    /*void ReplyFinish(QNetworkReply *reply);*/
+    void ReplyFinish(QNetworkReply *reply);
+
+    void TimeOut();
 
 private:
     void ReadConfig();
@@ -54,6 +56,7 @@ private:
     void ReadData();
     void Init();
     void SendUrl(QString userName);
+    void ShowBox(int tips);
     QString Encry(QString pwd);
     QString Decip(QString pwd);
 
@@ -69,5 +72,6 @@ private:
     bool                m_move;
     QPoint              m_startPoint;
     QPoint              m_windowPoint;
+    bool                m_bInLogin;
 };
 #endif // MAINWINDOW_H

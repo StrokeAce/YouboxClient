@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QUrl>
+#include <QTimer>
 #include "ui_mainwindow.h"
 
 #define DEF_GET_STATE(bCheck) (bCheck ? Qt::Checked : Qt::Unchecked)
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     m_move = false;
+    m_bInLogin = false;
     Init();
 }
 
@@ -125,6 +127,7 @@ void MainWindow::ReadData()
                 ui->comboBox_ip->addItem(ite.key());
 }
 
+// 加密
 QString MainWindow::Encry(QString pwd)
 {
     QByteArray baPw = pwd.toUtf8();
@@ -135,6 +138,7 @@ QString MainWindow::Encry(QString pwd)
     return baPw;
 }
 
+// 解码
 QString MainWindow::Decip(QString pwd)
 {
     QByteArray baPw = pwd.toUtf8();
@@ -145,6 +149,7 @@ QString MainWindow::Decip(QString pwd)
     return baPw;
 }
 
+// 发送账号校验请求
 void MainWindow::SendUrl(QString userName)
 {
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
@@ -163,7 +168,8 @@ void MainWindow::SendUrl(QString userName)
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinish(QNetworkReply*)));
 }
 
-/*void MainWindow::ReplyFinish(QNetworkReply *reply)
+// 账号校验返回
+void MainWindow::ReplyFinish(QNetworkReply *reply)
 {
     if(reply && reply->error() == QNetworkReply::NoError)
     {
@@ -177,11 +183,7 @@ void MainWindow::SendUrl(QString userName)
             QString userEnd = userName.right(6);
             if(userEnd != pwd)
             {
-                m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
-                m_box.setWindowModality(Qt::ApplicationModal);
-                m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
-                m_box.ChangeTips(6);
-                m_box.show();
+                ShowBox(6);
                 return;
             }
 
@@ -189,11 +191,7 @@ void MainWindow::SendUrl(QString userName)
 
             if(key.isEmpty())
             {
-                m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
-                m_box.setWindowModality(Qt::ApplicationModal);
-                m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
-                m_box.ChangeTips(4);
-                m_box.show();
+                ShowBox(4);
                 return;
             }
 
@@ -209,45 +207,61 @@ void MainWindow::SendUrl(QString userName)
 
             if(ip.isEmpty() || region.isEmpty())
             {
-                m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
-                m_box.setWindowModality(Qt::ApplicationModal);
-                m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
-                m_box.ChangeTips(4);
-                m_box.show();
+                ShowBox(4);
                 return;
             }
 
             int width = QApplication::desktop()->width();
             int height = QApplication::desktop()->height() - 80;//远程界面的高减少80是为了防止本地任务栏会遮挡远程的任务栏
 
-            QString execPath = QCoreApplication::applicationDirPath();
-            QString cmd;
-            cmd = execPath + "/freerdp /u:" + userName + " /p:" + pwd + " /d:" + region+ " /w:" + QString::number(width) + " /h:" + QString::number(height) + " /v:" + ip + " /cert-ignore -sec-nla";
-            system((char*)(cmd.toLatin1().data()));
+            QString execPath = QCoreApplication::applicationDirPath();            
+
+            char cmd[2048] = {0};
+            sprintf(cmd, "%s/freerdp /u:%s /p:%s /d:%s /w:%d /h:%d /v:%s /cert-ignore -sec-nla",
+                    (char*)execPath.toLatin1().data(),
+                    (char*)userName.toLatin1().data(),
+                    (char*)pwd.toLatin1().data(),
+                    (char*)region.toLatin1().data(),
+                    width,height,
+                    (char*)ip.toLatin1().data());
+            system(cmd);
+            m_bInLogin = false;
+            WriteConfig();
+            hide();
+            close();
         }
         else
         {
             // 返回false
-            m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
-            m_box.setWindowModality(Qt::ApplicationModal);
-            m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
-            m_box.ChangeTips(5);
-            m_box.show();
+            ShowBox(5);
             return;
         }
     }
-    else
-    {
-        // url无响应
-        m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
-        m_box.setWindowModality(Qt::ApplicationModal);
-        m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
-        m_box.ChangeTips(3);
-        m_box.show();
-        return;
-    }
     reply->close();
-}*/
+}
+
+// 定时触发
+void MainWindow::TimeOut()
+{
+    // http无响应
+    if(m_bInLogin)
+    {
+        ShowBox(3);
+    }
+}
+
+// 显示提示框
+void MainWindow::ShowBox(int tips)
+{
+    m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
+    m_box.setWindowModality(Qt::ApplicationModal);
+    m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+    m_box.ChangeTips(tips);
+    m_box.show();
+    ui->button_Login->setEnabled(true);
+    ui->button_Login->setStyleSheet("background-image: url(:/login.png);");
+    m_bInLogin = false;
+}
 
 // 登录事件响应
 void MainWindow::on_button_Login_clicked()
@@ -256,16 +270,15 @@ void MainWindow::on_button_Login_clicked()
     {
         return;
     }
+
+    ui->button_Login->setEnabled(false);
+    ui->button_Login->setStyleSheet("background-image: url(:/unlogin.png);");
 	
     QString userName = ui->lineEdit_UserName->text();
 
     if(userName.isEmpty())
     {
-        m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
-        m_box.setWindowModality(Qt::ApplicationModal);
-        m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
-        m_box.ChangeTips(1);
-        m_box.show();
+        ShowBox(1);
         return;
     }
 
@@ -273,17 +286,17 @@ void MainWindow::on_button_Login_clicked()
 
     if(pwd.isEmpty())
     {
-        m_box.move(geometry().x() + 37, geometry().y() + 200);//窗口居中
-        m_box.setWindowModality(Qt::ApplicationModal);
-        m_box.setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
-        m_box.ChangeTips(2);
-        m_box.show();
+        ShowBox(2);
         return;
     }
 
     SendUrl(userName);
+
+    m_bInLogin = true;
+    QTimer::singleShot(5000, this, SLOT(TimeOut()));
 }
 
+// 同意协议勾选框
 void MainWindow::on_checkBox_Agree_stateChanged(int arg1)
 {
     if(arg1)
@@ -300,6 +313,7 @@ void MainWindow::on_checkBox_Agree_stateChanged(int arg1)
     }
 }
 
+// 注册按钮响应
 void MainWindow::on_pushButton_clicked()
 {
     m_reg.move(geometry().x() + 40, geometry().y() + 140);//窗口居中
@@ -308,12 +322,14 @@ void MainWindow::on_pushButton_clicked()
     m_reg.show();
 }
 
+// 关闭按钮响应
 void MainWindow::on_mainWindow_Close_clicked()
 {
     WriteConfig();
     close();
 }
 
+// 协议跳转按钮
 void MainWindow::on_button_Turn_Agreement_clicked()
 {
     int rightX = geometry().x() - 335 + 1000;
@@ -324,6 +340,7 @@ void MainWindow::on_button_Turn_Agreement_clicked()
     m_agree.show();
 }
 
+// 密码保存框勾选
 void MainWindow::on_checkBox_Pwd_stateChanged(int arg1)
 {
     if(arg1)

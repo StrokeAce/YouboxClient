@@ -24,7 +24,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
+find_package(Qt5 COMPONENTS Widgets LinguistTools Network REQUIRED)
 
 set(TS_FILES RdpRemoteTools_zh_CN.ts)
 
@@ -67,6 +67,6 @@ else()
   )
 endif()
 
-target_link_libraries(youboxclient PRIVATE Qt5::Widgets)
+target_link_libraries(youboxclient PRIVATE Qt5::Widgets Qt5::Network)
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

@@ -79,9 +79,9 @@ border:1px solid red;}</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>5</x>
       <y>30</y>
-      <width>201</width>
+      <width>245</width>
       <height>51</height>
      </rect>
     </property>
