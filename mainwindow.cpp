@@ -213,13 +213,13 @@ void MainWindow::ReplyFinish(QNetworkReply *reply)
                 return;
             }
 
-            int width = QApplication::desktop()->width();
+            int width = QApplication::desktop()->width()-1;
             int height = QApplication::desktop()->height() - 80;//远程界面的高减少80是为了防止本地任务栏会遮挡远程的任务栏
 
             QString execPath = QCoreApplication::applicationDirPath();            
 
             char cmd[2048] = {0};
-            sprintf(cmd, "%s/freerdp /u:%s /p:%s /d:%s /w:%d /h:%d /v:%s /cert-ignore -sec-nla",
+            sprintf(cmd, "%s/freerdp /u:%s /p:%s /d:%s /w:%d /h:%d /v:%s /cert-ignore -sec-nla +clipboard",
                     (char*)execPath.toLatin1().data(),
                     (char*)userName.toLatin1().data(),
                     (char*)pwd.toLatin1().data(),
