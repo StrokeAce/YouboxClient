@@ -1,39 +1,27 @@
 [DEBREATE-0.7.13]
 <<CTRL>>
-Package: youboxclient
-Version: 1.0.1
+Package: com.deepin.youboxclient
+Version: 2.0
 Maintainer: gaowb <392464782@qq.com>
 Architecture: amd64
 Priority: optional
-Description: 兴和云远程桌面工具
+Description: 兴和应用交付客户端
 
 <</CTRL>>
 <<FILES>>
 1
-/mnt/hgfs/work/RdpRemoteTools/agreement.ini* -> agreement.ini -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/config.ini* -> config.ini -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/data.ini* -> data.ini -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/run.sh* -> run.sh -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/rdp_lib/freerdp* -> freerdp -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/rdp_lib/libfreerdp-client3.so.3* -> libfreerdp-client3.so.3 -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/rdp_lib/libfreerdp-client3.so.3.0.0* -> libfreerdp-client3.so.3.0.0 -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/rdp_lib/libfreerdp3.so.3* -> libfreerdp3.so.3 -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/rdp_lib/libfreerdp3.so.3.0.0* -> libfreerdp3.so.3.0.0 -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/rdp_lib/libuwac0.so.0.1.1* -> libuwac0.so.0.1.1 -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/rdp_lib/libwinpr-tools3.so.3.0.0* -> libwinpr-tools3.so.3.0.0 -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/rdp_lib/libwinpr3.so.3* -> libwinpr3.so.3 -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/rdp_lib/libwinpr3.so.3.0.0* -> libwinpr3.so.3.0.0 -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/build/youboxclient* -> youboxclient -> /opt/youboxclient
-/mnt/hgfs/work/RdpRemoteTools/images/bitbug_favicon.ico* -> bitbug_favicon.ico -> /opt/youboxclient
+/mnt/hgfs/work/RdpRemoteTools/entries -> entries -> /opt/apps/com.deepin.youboxclient
+/mnt/hgfs/work/RdpRemoteTools/files -> files -> /opt/apps/com.deepin.youboxclient
+/mnt/hgfs/work/RdpRemoteTools/info* -> info -> /opt/apps/com.deepin.youboxclient
 <</FILES>>
 <<SCRIPTS>>
 <<PREINST>>
 1
-sudo rm -rf /opt/youboxclient
+sudo rm -rf /opt/apps/com.deepin.youboxclient
 <</PREINST>>
 <<POSTINST>>
 1
-sudo chmod -R 777 /opt/youboxclient 
+sudo chmod -R 777 /opt/apps/com.deepin.youboxclient
 <</POSTINST>>
 <<PRERM>>
 0
@@ -391,9 +379,9 @@ Public License instead of this License.
 1
 Name=youboxclient
 Version=1.0
-Exec=/opt/youboxclient/run.sh
+Exec=/opt/apps/com.deepin.youboxclient/files/bin/run.sh
 Comment=nb
-Icon=/opt/youboxclient/bitbug_favicon.ico
+Icon=/opt/apps/com.deepin.youboxclient/files/icons/system_menu.ico
 Type=Application
 Terminal=false
 StartupNotify=true

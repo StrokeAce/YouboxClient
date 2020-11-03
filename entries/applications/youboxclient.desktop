@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=youboxclient
+Comment=application for youboxclient
+Exec=/opt/apps/com.deepin.youboxclient/files/bin/run.sh
+Icon=/opt/apps/com.deepin.youboxclient/files/icons/youboxclient.png
+Terminal=false
+Categories=Utility;
+Type=Application
