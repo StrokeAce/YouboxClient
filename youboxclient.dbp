@@ -1,8 +1,8 @@
 [DEBREATE-0.7.13]
 <<CTRL>>
 Package: com.deepin.youboxclient
-Version: 2.0
-Maintainer: gaowb <392464782@qq.com>
+Version: 2.0.0
+Maintainer: yinpeng <yinpeng@whsrc.com>
 Architecture: amd64
 Priority: optional
 Description: 兴和应用交付客户端
@@ -379,9 +379,9 @@ Public License instead of this License.
 1
 Name=youboxclient
 Version=1.0
-Exec=/opt/apps/com.deepin.youboxclient/files/bin/run.sh
+Exec=/opt/apps/com.deepin.youboxclient/files/run.sh
 Comment=nb
-Icon=/opt/apps/com.deepin.youboxclient/files/icons/system_menu.ico
+Icon=/opt/apps/com.deepin.youboxclient/files/system_menu.ico
 Type=Application
 Terminal=false
 StartupNotify=true
