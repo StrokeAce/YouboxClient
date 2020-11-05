@@ -1,8 +1,8 @@
 {
-    "appid": "com.deepin.youboxclient",
+    "appid": "com.whsrc.youboxclient",
     "name": "Youboxclient",
     "version": "2.0.0.0",
-    "arch": ["amd64","mips64el","arm64","sw_64"],
+    "arch": ["mips64el"],
     "permissions": {
         "autostart": false,
         "notification": false,
