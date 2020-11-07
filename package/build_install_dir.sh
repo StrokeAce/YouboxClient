@@ -20,7 +20,7 @@ else
 	cp -rf ../build/youboxclient ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/files/
 	
 	sudo chmod -R 755 ${PLATFORM}_deb_build/DEBIAN/
-	dpkg -b ${PLATFORM}_deb_build/ com.whsrc.youboxclient_2.0.0_${PLATFORM}.deb
+	sudo dpkg -b ${PLATFORM}_deb_build/ com.whsrc.youboxclient_2.0.0_${PLATFORM}.deb
 
 fi
 
