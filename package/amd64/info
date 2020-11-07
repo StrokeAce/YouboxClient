@@ -2,7 +2,7 @@
     "appid": "com.whsrc.youboxclient",
     "name": "Youboxclient",
     "version": "2.0.0.0",
-    "arch": ["mips64"],
+    "arch": ["amd64"],
     "permissions": {
         "autostart": false,
         "notification": false,

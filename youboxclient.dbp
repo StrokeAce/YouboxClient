@@ -3,6 +3,7 @@
 Package: com.whsrc.youboxclient
 Version: 2.0.0
 Maintainer: yinpeng <yinpeng@whsrc.com>
+Section: x11
 Architecture: amd64
 Priority: optional
 Description: 兴和应用交付客户端
@@ -10,9 +11,9 @@ Description: 兴和应用交付客户端
 <</CTRL>>
 <<FILES>>
 1
-/mnt/hgfs/work/RdpRemoteTools/entries -> entries -> /opt/apps/com.whsrc.youboxclient
-/mnt/hgfs/work/RdpRemoteTools/files -> files -> /opt/apps/com.whsrc.youboxclient
-/mnt/hgfs/work/RdpRemoteTools/info* -> info -> /opt/apps/com.whsrc.youboxclient
+/mnt/hgfs/work/RdpRemoteTools/install/x86/info* -> info -> /opt/apps/com.whsrc.youboxclient
+/mnt/hgfs/work/RdpRemoteTools/install/x86/files -> files -> /opt/apps/com.whsrc.youboxclient
+/mnt/hgfs/work/RdpRemoteTools/install/x86/entries -> entries -> /opt/apps/com.whsrc.youboxclient
 <</FILES>>
 <<SCRIPTS>>
 <<PREINST>>
@@ -377,6 +378,7 @@ Public License instead of this License.
 <</COPYRIGHT>>
 <<MENU>>
 1
+[FILENAME=com.whsrc.youboxclient]
 Name=youboxclient
 Version=1.0
 Exec=/opt/apps/com.whsrc.youboxclient/files/run.sh
