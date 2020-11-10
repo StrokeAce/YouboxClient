@@ -7,7 +7,13 @@ if  [ ! -n "$1" ] ;then
 else
 	PLATFORM=$1
 	
-	rm -rf ${PLATFORM}_deb_build
+	cd ../
+	mkdir build
+	cd build
+	cmake .. && make
+	cd ../package
+	
+	sudo rm -rf ${PLATFORM}_deb_build
 	
 	mkdir -p ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient
 	mkdir -p ${PLATFORM}_deb_build/DEBIAN
@@ -19,7 +25,7 @@ else
 	cp -rf pub/* ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/files/
 	cp -rf ../build/youboxclient ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/files/
 	
-	sudo chmod -R 755 ${PLATFORM}_deb_build/DEBIAN/
+	chmod -R 755 ${PLATFORM}_deb_build/DEBIAN/
 	sudo dpkg -b ${PLATFORM}_deb_build/ com.whsrc.youboxclient_2.0.0_${PLATFORM}.deb
 
 fi
