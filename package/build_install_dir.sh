@@ -6,13 +6,7 @@ if  [ ! -n "$1" ] ;then
 	echo "Please specify arg1 is amd64 or arm64 or mips64 or sw64"
 else
 	PLATFORM=$1
-	
-	cd ../
-	mkdir build
-	cd build
-	cmake .. && make
-	cd ../package
-	
+
 	sudo rm -rf ${PLATFORM}_deb_build
 	
 	mkdir -p ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient
@@ -23,7 +17,6 @@ else
 	cp -rf ${PLATFORM}/files ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/
 	cp -rf entries ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/
 	cp -rf pub/* ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/files/
-	cp -rf ../build/youboxclient ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/files/
 
 	chmod +x ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/entries/applications/com.whsrc.youboxclient.desktop
 	chmod +x ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/files/*	
