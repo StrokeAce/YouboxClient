@@ -24,7 +24,9 @@ else
 	cp -rf entries ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/
 	cp -rf pub/* ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/files/
 	cp -rf ../build/youboxclient ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/files/
-	
+
+	chmod +x ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/entries/applications/com.whsrc.youboxclient.desktop
+	chmod +x ${PLATFORM}_deb_build/opt/apps/com.whsrc.youboxclient/files/*	
 	chmod -R 755 ${PLATFORM}_deb_build/DEBIAN/
 	sudo dpkg -b ${PLATFORM}_deb_build/ com.whsrc.youboxclient_2.0.0_${PLATFORM}.deb
 
