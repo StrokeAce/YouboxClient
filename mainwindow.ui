@@ -12,13 +12,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>330</width>
     <height>550</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>16777215</width>
+    <width>330</width>
     <height>570</height>
    </size>
   </property>
@@ -31,16 +31,22 @@
   <property name="styleSheet">
    <string notr="true">#MainWindow{background-image: url(:/background.png);}</string>
   </property>
+  <property name="iconSize">
+   <size>
+    <width>24</width>
+    <height>24</height>
+   </size>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="minimumSize">
     <size>
-     <width>0</width>
+     <width>330</width>
      <height>550</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>16777215</width>
+     <width>330</width>
      <height>550</height>
     </size>
    </property>
@@ -198,7 +204,7 @@ QComboBox QAbstractItemView {background: rgb(255, 255, 255);selection-color:rgb(
     <property name="geometry">
      <rect>
       <x>28</x>
-      <y>470</y>
+      <y>490</y>
       <width>274</width>
       <height>40</height>
      </rect>
@@ -382,7 +388,11 @@ QCheckBox::indicator:checked:disabled{
     </property>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="sizeGripEnabled">
+    <bool>false</bool>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
