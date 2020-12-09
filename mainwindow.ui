@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>330</width>
-    <height>570</height>
+    <height>550</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -387,11 +387,6 @@ QCheckBox::indicator:checked:disabled{
      <string/>
     </property>
    </widget>
-  </widget>
-  <widget class="QStatusBar" name="statusbar">
-   <property name="sizeGripEnabled">
-    <bool>false</bool>
-   </property>
   </widget>
  </widget>
  <resources/>

@@ -2,6 +2,6 @@ package: com.whsrc.youboxclient
 version: 2.0.0
 section: X11
 priority: optional
-architecture: all
+architecture: sw_64
 maintainer: yinpeng@whsrc.com
 description: 兴和应用交付客户端
