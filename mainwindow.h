@@ -55,10 +55,11 @@ private:
     void WriteConfig();
     void ReadData();
     void Init();
+	bool Login();
     void SendUrl(QString userName);
     void ShowBox(int tips);
     QString Encry(QString pwd);
-    QString Decip(QString pwd);
+    QString Decip(QString pwd);	
 
 private:
     Ui::MainWindow *ui;
@@ -72,6 +73,8 @@ private:
     bool                m_move;
     QPoint              m_startPoint;
     QPoint              m_windowPoint;
-    bool                m_bInLogin;
+    bool                m_bLogined;
+	bool                m_bCheck;
+	QString				m_checkAddr;
 };
 #endif // MAINWINDOW_H

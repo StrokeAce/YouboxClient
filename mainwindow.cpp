@@ -21,7 +21,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     m_move = false;
-    m_bInLogin = false;
+    m_bLogined = false;
+	m_bAgree = false;
+	m_bSavePwd = false;
+	m_bCheck = true;
+	m_checkAddr = "http://61.184.241.30:20000/api/Authority/SearchUser?UserId=";
     Init();
 }
 
@@ -78,8 +82,10 @@ void MainWindow::ReadConfig()
     QSettings setting(path, QSettings::IniFormat);
     m_bSavePwd = setting.value("save_pwd", false).toBool();
     m_bAgree = setting.value("agree", false).toBool();
+	m_bCheck = setting.value("check", true).toBool();
     QString user = setting.value("user").toString();
     QString pwd = setting.value("pwd").toString();
+	m_checkAddr = setting.value("check_addr").toString();
     if(m_bSavePwd)
     {
         ui->lineEdit_UserName->setText(Decip(user));
@@ -149,6 +155,68 @@ QString MainWindow::Decip(QString pwd)
     return baPw;
 }
 
+bool MainWindow::Login()
+{
+	QString pwd = ui->lineEdit_Pwd->text();
+	QString userName = ui->lineEdit_UserName->text();
+	QString userEnd = userName.right(6);
+	if(userEnd != pwd)
+	{
+		ShowBox(6);
+		return false;
+	}
+
+	QString key = ui->comboBox_ip->currentText();
+
+	if(key.isEmpty())
+	{
+		ShowBox(4);
+		return false;
+	}
+
+	QString ip = "";
+	QString region = "";
+	QMap<QString,Info>::Iterator iter;
+	iter = m_mapIpList.find(key);
+	if(iter != m_mapIpList.end())
+	{
+		ip = iter.value().ip;
+		region = iter.value().region;
+	}
+
+	if(ip.isEmpty() || region.isEmpty())
+	{
+		ShowBox(4);
+		return false;
+	}
+
+	int width = QApplication::desktop()->width()-1;
+	int height = QApplication::desktop()->height() - 80;//远程界面的高减少80是为了防止本地任务栏会遮挡远程的任务栏
+
+	QString execPath = QCoreApplication::applicationDirPath();            
+
+	char cmd[2048] = {0};
+	sprintf(cmd, "%s/freerdp /u:%s /p:%s /d:%s /w:%d /h:%d /v:%s /cert-ignore -sec-nla +clipboard",
+		(char*)execPath.toLatin1().data(),
+		(char*)userName.toLatin1().data(),
+		(char*)pwd.toLatin1().data(),
+		(char*)region.toLatin1().data(),
+		width,height,
+		(char*)ip.toLatin1().data());
+
+	FILE *fp = NULL;
+	fp = popen(cmd, "r");
+	if(NULL == fp)
+	{
+		ShowBox(4);
+		return false;
+	}
+	
+	WriteConfig();
+	close();
+	return true;
+}
+
 // 发送账号校验请求
 void MainWindow::SendUrl(QString userName)
 {
@@ -162,7 +230,7 @@ void MainWindow::SendUrl(QString userName)
     conf.setProtocol(QSsl::TlsV1SslV3);
     request.setSslConfiguration(conf);
 
-    QString url = "http://61.184.241.30:20000/api/Authority/SearchUser?UserId=" + userName;
+    QString url = m_checkAddr + userName;
     request.setUrl(QUrl(url));
     manager->get(request);
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinish(QNetworkReply*)));
@@ -180,69 +248,14 @@ void MainWindow::ReplyFinish(QNetworkReply *reply)
 
         if(reStr == "true")
         {
-            QString pwd = ui->lineEdit_Pwd->text();
-            QString userName = ui->lineEdit_UserName->text();
-            QString userEnd = userName.right(6);
-            if(userEnd != pwd)
-            {
-                ShowBox(6);
-                return;
-            }
-
-            QString key = ui->comboBox_ip->currentText();
-
-            if(key.isEmpty())
-            {
-                ShowBox(4);
-                return;
-            }
-
-            QString ip = "";
-            QString region = "";
-            QMap<QString,Info>::Iterator iter;
-            iter = m_mapIpList.find(key);
-            if(iter != m_mapIpList.end())
-            {
-                ip = iter.value().ip;
-                region = iter.value().region;
-            }
-
-            if(ip.isEmpty() || region.isEmpty())
-            {
-                ShowBox(4);
-                return;
-            }
-
-            int width = QApplication::desktop()->width()-1;
-            int height = QApplication::desktop()->height() - 80;//远程界面的高减少80是为了防止本地任务栏会遮挡远程的任务栏
-
-            QString execPath = QCoreApplication::applicationDirPath();            
-
-            char cmd[2048] = {0};
-            sprintf(cmd, "%s/freerdp /u:%s /p:%s /d:%s /w:%d /h:%d /v:%s /cert-ignore -sec-nla +clipboard",
-                    (char*)execPath.toLatin1().data(),
-                    (char*)userName.toLatin1().data(),
-                    (char*)pwd.toLatin1().data(),
-                    (char*)region.toLatin1().data(),
-                    width,height,
-                    (char*)ip.toLatin1().data());
-
-            FILE *fp = NULL;
-            fp = popen(cmd, "r");
-            if(NULL == fp)
-            {
-                ShowBox(4);
-                return;
-            }
-            m_bInLogin = false;
-            WriteConfig();
-            close();
+			if (Login())
+			{
+				m_bLogined = true;
+			}
         }
         else
-        {
-            // 返回false
+        {            
             ShowBox(5);
-            return;
         }
     }
 }
@@ -251,7 +264,7 @@ void MainWindow::ReplyFinish(QNetworkReply *reply)
 void MainWindow::TimeOut()
 {
     // http无响应
-    if(m_bInLogin)
+    if(!m_bLogined)
     {
         ShowBox(3);
     }
@@ -267,7 +280,6 @@ void MainWindow::ShowBox(int tips)
     m_box.show();
     ui->button_Login->setEnabled(true);
     ui->button_Login->setStyleSheet("background-image: url(:/login.png);");
-    m_bInLogin = false;
 }
 
 // 登录事件响应
@@ -297,9 +309,15 @@ void MainWindow::on_button_Login_clicked()
         return;
     }
 
-    SendUrl(userName);
+	if (m_bCheck)
+	{
+		SendUrl(userName);
+	}
+	else
+	{
+		Login();
+	}
 
-    m_bInLogin = true;
     QTimer::singleShot(5000, this, SLOT(TimeOut()));
 }
 
